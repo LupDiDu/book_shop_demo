@@ -10,7 +10,7 @@ services:
     depends_on:
       - service-db
     environment:
-      - SERVER_PORT= 8181
+      - SERVER_PORT= 8080
       - SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/mydatabase
 
   service-db:
@@ -20,6 +20,4 @@ services:
       POSTGRES_PASSWORD: 4043434
     ports:
       - "15432:5432"
-    volumes:
-      - db-data:/var/lib/postgresql/data
     restart: unless-stopped

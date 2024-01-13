@@ -1,5 +1,6 @@
-package com.library.library.Users;
+package com.library.library.Repository;
 
+import com.library.library.Users.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

@@ -18,12 +18,12 @@ public class Book {
     private int id;
     private String name;
     private String author;
-    private int yearOfPublishing;
+    private String yearOfPublishing;
     private int cost;
     private int score;
     private ArrayList<String> genres = new ArrayList<String>();
 
-    public Book(String name, String author, int yearOfPublishing,
+    public Book(String name, String author, String yearOfPublishing,
                 int cost, int score, ArrayList<String> genres) {
         this.name = name;
         this.author = author;
@@ -67,11 +67,11 @@ public class Book {
         this.author = author;
     }
 
-    public int getYearOfPublishing() {
+    public String getYearOfPublishing() {
         return yearOfPublishing;
     }
 
-    public void setYearOfPublishing(int yearOfPublishing) {
+    public void setYearOfPublishing(String yearOfPublishing) {
         this.yearOfPublishing = yearOfPublishing;
     }
 

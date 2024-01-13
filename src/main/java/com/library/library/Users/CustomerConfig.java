@@ -1,5 +1,6 @@
 package com.library.library.Users;
 
+import com.library.library.Repository.CustomerRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
