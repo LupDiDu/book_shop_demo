@@ -21,6 +21,7 @@ public class CustomerController {
     public List<Customer> getCustomer(){
         return customerService.getCustomer();
     }
+
     @PostMapping
     public void registryNewCustomer(@RequestBody Customer customer){
         customerService.addNewCustomer(customer);
