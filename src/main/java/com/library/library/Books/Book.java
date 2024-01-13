@@ -1,0 +1,93 @@
+package com.library.library.Books;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+@Entity
+@Table
+public class Book {
+    @Id
+    @SequenceGenerator(
+            name = "book_sequence",
+            sequenceName = "book_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "book_sequence"
+    )
+    private int id;
+    private String name;
+    private String author;
+    private int yearOfPublishing;
+    private int cost;
+    private int score;
+    private ArrayList<String> genres = new ArrayList<String>();
+
+    public Book(String name, String author, int yearOfPublishing,
+                int cost, int score, ArrayList<String> genres) {
+        this.name = name;
+        this.author = author;
+        this.yearOfPublishing = yearOfPublishing;
+        this.cost = cost;
+        this.score = score;
+        this.genres = genres;
+    }
+
+    public ArrayList<String> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(ArrayList<String> genres) {
+        this.genres = genres;
+    }
+
+    public Book(){}
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public int getYearOfPublishing() {
+        return yearOfPublishing;
+    }
+
+    public void setYearOfPublishing(int yearOfPublishing) {
+        this.yearOfPublishing = yearOfPublishing;
+    }
+
+    public int getCost() {
+        return cost;
+    }
+
+    public void setCost(int cost) {
+        this.cost = cost;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+}
