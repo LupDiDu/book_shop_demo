@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
     @RestController
-    @RequestMapping("/api/addUser")
+    @RequestMapping("/api/addBook")
     public class BookController {
 
         private final BookService bookService;
@@ -28,12 +28,12 @@ import java.util.List;
             bookService.addNewBook(book);
         }
         @DeleteMapping(path = "bookId")
-        public void deleteCustomer(@PathVariable("bookId") Long bookId){
+        public void deleteBook(@PathVariable("bookId") Long bookId){
             bookService.deleteBookById(bookId);
         }
 
         @PutMapping(path = "bookId")
-        public void updateCustomer(@PathVariable("bookId") Long bookId,
+        public void updateBook(@PathVariable("bookId") Long bookId,
                                    @RequestParam(required = false) String name,
                                    @RequestParam(required = false) String author,
                                    @RequestParam(required = false) String yearOfPublishing,

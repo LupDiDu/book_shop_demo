@@ -1,16 +1,16 @@
 package com.library.library.Books;
 
 import com.library.library.Repository.BookRepository;
-import com.library.library.Repository.CustomerRepository;
-import com.library.library.Users.Customer;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+@Service
 public class BookService {
     public final BookRepository bookRepository;
 
