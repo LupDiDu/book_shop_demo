@@ -3,7 +3,7 @@ services:
   client-backend:
     image: client:0.0.1
     build:
-      context: .
+      context: src
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
