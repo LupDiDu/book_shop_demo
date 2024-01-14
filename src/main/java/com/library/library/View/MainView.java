@@ -13,10 +13,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.value.ValueChangeMode;
 
-
-
-
-@Route("")
+@Route("/")
 public class MainView extends VerticalLayout {
 
     private final CustomerEditor customerEditor;
@@ -52,11 +49,7 @@ public class MainView extends VerticalLayout {
         });
 
         showCustomer("");
-
-
         showCustomer("");
-
-
 
     }
 
