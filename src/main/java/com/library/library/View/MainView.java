@@ -3,17 +3,17 @@ package com.library.library.View;
 import com.library.library.Components.CustomerEditor;
 import com.library.library.Repository.CustomerRepository;
 import com.library.library.Users.Customer;
-import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.router.Route;
-import org.springframework.beans.factory.annotation.Autowired;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.value.ValueChangeMode;
+import com.vaadin.flow.router.Route;
+import org.springframework.beans.factory.annotation.Autowired;
 
-@Route("/")
+@Route
 public class MainView extends VerticalLayout {
 
     private final CustomerEditor customerEditor;
@@ -21,8 +21,8 @@ public class MainView extends VerticalLayout {
     private final Button addNewButton = new Button("Create Customer", VaadinIcon.PLUS.create());
     private final HorizontalLayout toolbar = new HorizontalLayout(filter, addNewButton);
 
-    private CustomerRepository customerRepository;
-    private Grid<Customer> customerGrid = new Grid<>(Customer.class);
+    public CustomerRepository customerRepository;
+    public Grid<Customer> customerGrid = new Grid<>(Customer.class);
 
     @Autowired
     public MainView(CustomerRepository customerRepository, CustomerEditor customerEditor) {
@@ -48,7 +48,6 @@ public class MainView extends VerticalLayout {
             showCustomer(filter.getValue());
         });
 
-        showCustomer("");
         showCustomer("");
 
     }
