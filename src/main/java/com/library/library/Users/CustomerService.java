@@ -24,8 +24,8 @@ public class CustomerService {
     }
 
     public void addNewCustomer(Customer customer) {
-        Optional<Customer> customerByEmail = customerRepository.findCustomerByEmail(customer.getEmail());
-        if (customerByEmail.isPresent()) {
+        List<Customer> customerByEmail = customerRepository.findCustomerByEmail(customer.getEmail());
+        if (Objects.equals(customerByEmail.getFirst().getEmail(), customer.getEmail())) {
             throw new IllegalStateException("email taken");
         } else {
             customerRepository.save(customer);

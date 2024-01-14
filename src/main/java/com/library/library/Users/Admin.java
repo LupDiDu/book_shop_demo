@@ -12,6 +12,9 @@ import java.util.ArrayList;
 public class Admin extends User{
 //    public final BookRepository bookRepository;
 
+    public Admin() {
+    }
+
     public Admin(String name, String email, String password) {
         super(name, email, password, "admin");
 //        this.bookRepository = bookRepository;

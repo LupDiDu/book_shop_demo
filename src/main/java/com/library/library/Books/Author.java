@@ -23,6 +23,9 @@ public class Author {
     private Calendar dateOfBirth;
     private Calendar dateOfDeath;
 
+    public Author() {
+    }
+
     public Author(String name, String surname, Calendar dateOfBirth, Calendar dateOfDeath) {
         this.name = name;
         this.surname = surname;

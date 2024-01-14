@@ -22,6 +22,9 @@ public abstract class User {
     private Long id;
     private String name;
 
+    protected User() {
+    }
+
     public String getPassword() {
         return password;
     }

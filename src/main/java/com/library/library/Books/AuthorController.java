@@ -31,7 +31,7 @@ public class AuthorController {
     }
 
     @PutMapping(path = "authorId")
-    public void updateCustomer(@PathVariable("authorId") Long authorId,
+    public void updateAuthor(@PathVariable("authorId") Long authorId,
                                @RequestParam(required = false) String name,
                                @RequestParam(required = false) String surname,
                                @RequestParam(required = false) Calendar dateOfBirth,
