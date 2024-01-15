@@ -26,24 +26,27 @@ public class CustomerService {
 
     public String addNewCustomer(Customer customer) {
         List<Customer> customerByEmail = customerRepository.findCustomerByEmail(customer.getEmail());
-        if(customer.getName().isEmpty()){
-            return "Name cannot be empty.";
+        try {
+            if (customer.getName().isEmpty()) {
+                return "Name cannot be empty.";
+            } else if (customer.getEmail().isEmpty()) {
+                return "Email cannot be empty.";
+            }
+            else if (!customerByEmail.isEmpty() && Objects.equals(customer.getEmail(), customerByEmail.getFirst().getEmail())) {
+                return "This email has already been taken.";
+            }
+            else if  (customer.getPassword().isEmpty() || customer.getPassword() == null){
+                return "Password cannot be empty.";
+            }
+            //Password must contain at least one number and one letter
+            else if ( !Pattern.matches("^(?=.*[a-zA-Z])(?=.*\\d)[a-zA-Z\\d]{6,}$", customer.getPassword())){
+                return "Password is too short or/and must contain at least one number and one letter.";
+            }
+            } catch (Exception e) {
+                return e.toString();
+            }
+            return "Success";
         }
-        else if (customer.getEmail().isEmpty()){
-            return "Email cannot be empty.";
-        }
-        else if(Objects.equals(customer.getEmail(), customerByEmail.getFirst().getEmail())){
-            return "This email has already taken.";
-        }
-        else if  (customer.getPassword().isEmpty() || customer.getPassword() == null){
-            return "Password cannot be empty.";
-        }
-        //Password must contain at least one number and one letter
-        else if ( !Pattern.matches("^(?=.*[a-zA-Z])(?=.*\\d)[a-zA-Z\\d]{6,}$", customer.getPassword())){
-            return "Password is too short or/and must contain at least one number and one letter.";
-        }
-        return "Success";
-    }
 
     public boolean deleteCustomerById(Customer customer) {
         boolean exists = customerRepository.existsById(customer.getId());

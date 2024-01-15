@@ -15,6 +15,10 @@ public class Customer extends User{
     public String getEmail() {
         return super.getEmail();
     }
+
+    public String getPassword() {
+        return super.getPassword();
+    }
     public String toString() {
         return super.toString();
     }
