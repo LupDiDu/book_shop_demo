@@ -18,8 +18,6 @@ import com.vaadin.flow.spring.annotation.UIScope;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Objects;
-
 
 @SpringComponent
     @UIScope
@@ -112,23 +110,27 @@ import java.util.Objects;
             }
         }
 
+
         public void editCustomer(Customer customer) {
             if (customer == null) {
                 setVisible(false);
                 return;
             }
-
+//
             if (customer.getId() != null) {
                 this.customer = customerRepository.findById(customer.getId()).orElse(customer);
             } else {
                 this.customer = customer;
             }
+            setVisible(true);
 
             binder.setBean(this.customer);
 
-            setVisible(true);
 
             name.focus();
+
+            cancel.addClickListener(e -> {
+                setVisible(false);  });
         }
     }
 
