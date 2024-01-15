@@ -52,6 +52,7 @@ public class CustomerService {
             else if ( !Pattern.matches("^(?=.*[a-zA-Z])(?=.*\\d)[a-zA-Z\\d]{6,}$", customer.getPassword())){
                 return "Password is too short or/and must contain at least one number and one letter.";
             }
+            customer.setHashPassword(customer.getPassword().hashCode());
             } catch (Exception e) {
                 return e.toString();
             }

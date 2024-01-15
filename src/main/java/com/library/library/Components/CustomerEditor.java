@@ -78,12 +78,12 @@ import org.springframework.beans.factory.annotation.Autowired;
             // RadioButtonGroup for customer or admin
             radioButtonGroup.setLabel("Which user you want to create?");
             radioButtonGroup.setItems("customer", "admin");
-            radioButtonGroup.setValue("customer");
 
             radioButtonGroup.addValueChangeListener(event -> {
                 String selectedValue = event.getValue();
             });
             add(radioButtonGroup);
+            radioButtonGroup.setValue("customer");
 
 
 
