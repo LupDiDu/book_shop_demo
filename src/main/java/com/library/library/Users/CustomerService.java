@@ -29,10 +29,19 @@ public class CustomerService {
         try {
             if (customer.getName().isEmpty()) {
                 return "Name cannot be empty.";
-            } else if (customer.getEmail().isEmpty()) {
+            }
+            else if (!Pattern.matches("^[a-zA-Z]+(?:[\\\\s-][a-zA-Z]+)*$", customer.getName())) {
+                return "Name is not valid.";
+            }
+            else if (customer.getEmail().isEmpty()) {
                 return "Email cannot be empty.";
             }
-            else if (!customerByEmail.isEmpty() && Objects.equals(customer.getEmail(), customerByEmail.getFirst().getEmail())) {
+            else if (!Pattern.matches("^(?=.*[a-zA-Z0-9])([a-zA-Z0-9_.+-])+@([a-zA-Z0-9-])+\\.([a-zA-Z0-9-.])+$",
+                    customer.getEmail())){
+                return "Email is not valid.";
+            }
+            else if (!customerByEmail.isEmpty() && Objects.equals(customer.getEmail(),
+                    customerByEmail.getFirst().getEmail())) {
                 return "This email has already been taken.";
             }
             else if  (customer.getPassword().isEmpty() || customer.getPassword() == null){
