@@ -31,6 +31,7 @@ import org.springframework.beans.factory.annotation.Autowired;
         private TextField email = new TextField("", "Email");
         private TextField password = new TextField("", "Password");
 
+
          public void setLabel(String value) {
             save.setText(value);
          }
@@ -65,6 +66,8 @@ import org.springframework.beans.factory.annotation.Autowired;
             add(name, email, password, buttons);
 
             binder.bindInstanceFields(this);
+            binder.forField(radioButtonGroup)
+                    .bind(Customer::getRole, Customer::setRole);
 
             setSpacing(true);
 
