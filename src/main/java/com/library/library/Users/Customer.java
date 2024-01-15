@@ -13,4 +13,7 @@ public class Customer extends User{
         super(name, email, password, "customer");
     }
 
+    public String toString() {
+        return super.toString();
+    }
 }

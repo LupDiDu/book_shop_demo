@@ -26,10 +26,11 @@ public class CustomerController {
     public void registryNewCustomer(@RequestBody Customer customer){
         customerService.addNewCustomer(customer);
     }
-    @DeleteMapping(path = "customerId")
-    public void deleteCustomer(@PathVariable("customerId") Long customerId){
-        customerService.deleteCustomerById(customerId);
-    }
+
+//    @DeleteMapping(path = "customerId")
+//    public void deleteCustomer(@PathVariable("customerId") Long customerId){
+//        customerService.deleteCustomerById(customerId);
+//    }
 
     @PutMapping(path = "customerId")
     public void updateCustomer(@PathVariable("customerId") Long customerId,

@@ -3,6 +3,7 @@ package com.library.library.Components;
 
 import com.library.library.Repository.CustomerRepository;
 import com.library.library.Users.Customer;
+import com.library.library.Users.CustomerService;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.KeyNotifier;
 import com.vaadin.flow.component.button.Button;
@@ -20,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
     @UIScope
     public class CustomerEditor  extends VerticalLayout implements KeyNotifier {
         private final CustomerRepository customerRepository;
+        private final CustomerService customerService;
 
         private Customer customer;
 
@@ -49,8 +51,9 @@ import org.springframework.beans.factory.annotation.Autowired;
         }
 
         @Autowired
-        public CustomerEditor(CustomerRepository customerRepository) {
+        public CustomerEditor(CustomerRepository customerRepository, CustomerService customerService) {
             this.customerRepository = customerRepository;
+            this.customerService = customerService;
 
             add(name, email, password, buttons);
 
@@ -70,12 +73,12 @@ import org.springframework.beans.factory.annotation.Autowired;
         }
 
         private void save() {
-            customerRepository.save(customer);
+            customerService.addNewCustomer(customer);
             changeHandler.onChange();
         }
 
         private void delete() {
-            customerRepository.delete(customer);
+            customerService.deleteCustomerById(customer);
             changeHandler.onChange();
         }
 

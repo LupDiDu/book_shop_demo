@@ -25,20 +25,21 @@ public class CustomerService {
 
     public void addNewCustomer(Customer customer) {
         List<Customer> customerByEmail = customerRepository.findCustomerByEmail(customer.getEmail());
-        if (Objects.equals(customerByEmail.getFirst().getEmail(), customer.getEmail())) {
-            throw new IllegalStateException("email taken");
-        } else {
+        if(!customerByEmail.isEmpty()) {
+            throw new IllegalStateException("Email taken");
+        }
+         else {
             customerRepository.save(customer);
         }
     }
 
-    public void deleteCustomerById(Long customerId) {
-        boolean exists = customerRepository.existsById(customerId);
+    public void deleteCustomerById(Customer customer) {
+        boolean exists = customerRepository.existsById(customer.getId());
         if (exists){
-            customerRepository.deleteById(customerId);
+            customerRepository.deleteById(customer.getId());
         }
         else {
-            throw new IllegalStateException("Customer with id: " + customerId + " doesn't exists.");
+            throw new IllegalStateException("This customer doesn't exists.");
         }
     }
 
