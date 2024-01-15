@@ -44,20 +44,30 @@ public class CustomerService {
     }
 
     @Transactional
-    public void updateCustomer(Long customerId, String name, String  email) {
+    public void updateCustomer(Long customerId, String name, String  email, String password) {
        Customer customer = customerRepository.findById(customerId)
                .orElseThrow(()-> new IllegalStateException("Customer with id: " + customerId + " doesn't exists."));
 
-       if(name != null && name.length() > 0 && Objects.equals(customer.getName(), name)){
-           customer.setName(name);
+       if(name != null && !name.isEmpty()){
+           if(!customer.getName().equals(name)){
+               customer.setName(name);
+           }
        }
 
-        if(email != null && email.length() > 0 && Objects.equals(customer.getEmail(), email)){
-            Optional<Customer> customerOptional = customerRepository.findById(customerId);
-            if (customerOptional.isPresent()){
-                throw new IllegalStateException("This email has already taken.");
+       if(password != null && !password.isEmpty()){
+           if(!customer.getPassword().equals(password)){
+               customer.setPassword(password);
+           }
+       }
+
+        if(email != null && !email.isEmpty() && Objects.equals(customer.getEmail(), email)){
+            if(!customer.getEmail().equals(email)){
+                Optional<Customer> customerOptional = customerRepository.findById(customerId);
+                if (customerOptional.isPresent()){
+                    throw new IllegalStateException("This email has already taken.");
+                }
+                customer.setEmail(email);
             }
-            customer.setEmail(email);
         }
 
     }

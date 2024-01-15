@@ -9,6 +9,7 @@ import com.vaadin.flow.component.KeyNotifier;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.spring.annotation.SpringComponent;
@@ -32,7 +33,8 @@ import org.springframework.beans.factory.annotation.Autowired;
         private Button save = new Button("Save");
         private Button cancel = new Button("Cancel");
         private Button delete = new Button("Delete");
-        private HorizontalLayout buttons = new HorizontalLayout(save, cancel, delete);
+        private RadioButtonGroup<String> radioButtonGroup = new RadioButtonGroup<>();
+        private HorizontalLayout buttons = new HorizontalLayout(save, cancel, delete, radioButtonGroup);
 
         private Binder<Customer> binder = new Binder<>(Customer.class);
 
@@ -63,6 +65,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 
             save.getElement().getThemeList().add("primary");
             delete.getElement().getThemeList().add("error");
+
+
+            // RadioButtonGroup for customer or admin
+            radioButtonGroup.setLabel("Which user you want to create?");
+            radioButtonGroup.setItems("customer", "admin");
+
+            radioButtonGroup.addValueChangeListener(event -> {
+                String selectedValue = event.getValue();
+            });
+            add(radioButtonGroup);
+
+
 
             addKeyPressListener(Key.ENTER, e -> save());
 
