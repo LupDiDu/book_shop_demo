@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.regex.Pattern;
 
 @Service
 public class CustomerService {
@@ -23,24 +24,33 @@ public class CustomerService {
         return customerRepository.findAll();
     }
 
-    public void addNewCustomer(Customer customer) {
+    public String addNewCustomer(Customer customer) {
         List<Customer> customerByEmail = customerRepository.findCustomerByEmail(customer.getEmail());
-        if(!customerByEmail.isEmpty()) {
-            throw new IllegalStateException("Email taken");
+        if(customer.getName().isEmpty()){
+            return "Name cannot be empty.";
         }
-         else {
-            customerRepository.save(customer);
+        else if (customer.getEmail().isEmpty()){
+            return "Email cannot be empty.";
         }
+        else if(Objects.equals(customer.getEmail(), customerByEmail.getFirst().getEmail())){
+            return "This email has already taken.";
+        }
+        else if  (customer.getPassword().isEmpty() || customer.getPassword() == null){
+            return "Password cannot be empty.";
+        }
+        else if ( !Pattern.matches("^(?=.*[a-zA-Z])(?=.*\\d)[a-zA-Z\\d]{6,}$", customer.getPassword())){
+            return "Password is too short or/and must contain at least one number and one letter.";
+        }
+        return "Success";
     }
 
-    public void deleteCustomerById(Customer customer) {
+    public boolean deleteCustomerById(Customer customer) {
         boolean exists = customerRepository.existsById(customer.getId());
         if (exists){
             customerRepository.deleteById(customer.getId());
+            return true;
         }
-        else {
-            throw new IllegalStateException("This customer doesn't exists.");
-        }
+        return false;
     }
 
     @Transactional

@@ -7,6 +7,7 @@ import com.library.library.Users.CustomerService;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.KeyNotifier;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
@@ -17,8 +18,10 @@ import com.vaadin.flow.spring.annotation.UIScope;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Objects;
 
-    @SpringComponent
+
+@SpringComponent
     @UIScope
     public class CustomerEditor  extends VerticalLayout implements KeyNotifier {
         private final CustomerRepository customerRepository;
@@ -87,13 +90,26 @@ import org.springframework.beans.factory.annotation.Autowired;
         }
 
         private void save() {
-            customerService.addNewCustomer(customer);
-            changeHandler.onChange();
+            String result = customerService.addNewCustomer(customer);
+            if(result.equals("Success")) {
+                customerRepository.save(customer);
+                changeHandler.onChange();
+            }
+            else {
+                Notification notification = Notification.show(result,
+                        3000, Notification.Position.BOTTOM_START);
+            }
         }
 
         private void delete() {
-            customerService.deleteCustomerById(customer);
-            changeHandler.onChange();
+            if(customerService.deleteCustomerById(customer)){
+                customerRepository.delete(customer);
+                changeHandler.onChange();
+            }
+            else {
+                Notification notification = Notification.show("There is no such customer with this id",
+                        3000, Notification.Position.BOTTOM_START);
+            }
         }
 
         public void editCustomer(Customer customer) {
