@@ -38,6 +38,7 @@ public class CustomerService {
         else if  (customer.getPassword().isEmpty() || customer.getPassword() == null){
             return "Password cannot be empty.";
         }
+        //Password must contain at least one number and one letter
         else if ( !Pattern.matches("^(?=.*[a-zA-Z])(?=.*\\d)[a-zA-Z\\d]{6,}$", customer.getPassword())){
             return "Password is too short or/and must contain at least one number and one letter.";
         }
