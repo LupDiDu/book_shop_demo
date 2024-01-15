@@ -41,7 +41,8 @@ public class CustomerService {
                 return "Email is not valid.";
             }
             else if (!customerByEmail.isEmpty() && Objects.equals(customer.getEmail(),
-                    customerByEmail.getFirst().getEmail())) {
+                    customerByEmail.getFirst().getEmail()) &&
+                    !Objects.equals(customer.getId(), customerByEmail.getFirst().getId())) {
                 return "This email has already been taken.";
             }
             else if  (customer.getPassword().isEmpty() || customer.getPassword() == null){
