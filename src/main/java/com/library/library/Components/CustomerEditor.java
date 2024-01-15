@@ -31,7 +31,11 @@ import org.springframework.beans.factory.annotation.Autowired;
         private TextField email = new TextField("", "Email");
         private TextField password = new TextField("", "Password");
 
-        private Button save = new Button("Save");
+         public void setLabel(String value) {
+            save.setText(value);
+         }
+
+    private Button save = new Button("Save");
         private Button cancel = new Button("Cancel");
         private Button delete = new Button("Delete");
         private RadioButtonGroup<String> radioButtonGroup = new RadioButtonGroup<>();
@@ -71,6 +75,7 @@ import org.springframework.beans.factory.annotation.Autowired;
             // RadioButtonGroup for customer or admin
             radioButtonGroup.setLabel("Which user you want to create?");
             radioButtonGroup.setItems("customer", "admin");
+            radioButtonGroup.setValue("customer");
 
             radioButtonGroup.addValueChangeListener(event -> {
                 String selectedValue = event.getValue();
@@ -114,12 +119,15 @@ import org.springframework.beans.factory.annotation.Autowired;
         public void editCustomer(Customer customer) {
             if (customer == null) {
                 setVisible(false);
+                setLabel("Save");
                 return;
             }
 //
             if (customer.getId() != null) {
+                setLabel("Edit");
                 this.customer = customerRepository.findById(customer.getId()).orElse(customer);
             } else {
+                setLabel("Save");
                 this.customer = customer;
             }
             setVisible(true);

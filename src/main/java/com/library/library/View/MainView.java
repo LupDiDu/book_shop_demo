@@ -49,7 +49,6 @@ public class MainView extends VerticalLayout {
         });
 
         showCustomer("");
-        showCustomer("");
 
     }
 
