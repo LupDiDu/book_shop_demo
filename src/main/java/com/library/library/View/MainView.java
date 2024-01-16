@@ -11,6 +11,7 @@ import com.vaadin.flow.router.Route;
 
 @Route("/")
 public class MainView extends VerticalLayout {
+    public static TextField searchField = new TextField();
 
     public MainView() {
 
@@ -23,10 +24,9 @@ public class MainView extends VerticalLayout {
         Button searchButton = new Button(VaadinIcon.SEARCH.create());
         searchButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY,
                 ButtonVariant.LUMO_CONTRAST);
-        searchButton.setHeight("45px");
+        searchButton.setHeight("40px");
 
         // Поле для поиска
-        TextField searchField = new TextField();
         searchField.setPlaceholder("Search...");
         searchField.setSuffixComponent(searchButton);
 
@@ -52,6 +52,9 @@ public class MainView extends VerticalLayout {
         HorizontalLayout layout = new HorizontalLayout(homeLink, searchField, userLink);
         layout.setWidthFull();
         add(layout);
+
+        VerticalLayout verticalLayout = new VerticalLayout();
+//        add.verticalLayout;
 
     }
 }

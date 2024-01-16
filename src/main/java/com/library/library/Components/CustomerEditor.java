@@ -7,6 +7,8 @@ import com.library.library.Users.CustomerService;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.KeyNotifier;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.confirmdialog.ConfirmDialog;
+import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -93,6 +95,33 @@ import org.springframework.beans.factory.annotation.Autowired;
             delete.addClickListener(e -> delete());
             cancel.addClickListener(e -> editCustomer(customer));
             setVisible(false);
+
+//            Span status = new Span();
+//            status.setVisible(false);
+//
+//            ConfirmDialog dialog = new ConfirmDialog();
+//            dialog.setHeader("Unsaved changes");
+//            dialog.setText(
+//                    "There are unsaved changes. Do you want to discard or save them?");
+//
+//            dialog.setCancelable(true);
+//            dialog.addCancelListener(event -> cancel("Canceled"));
+//
+//            dialog.setRejectable(true);
+//            dialog.setRejectText("Discard");
+//            dialog.addRejectListener(event -> cancel("Discarded"));
+//
+//            dialog.setConfirmText("Save");
+//            dialog.addConfirmListener(event -> save("Saved"));
+//
+//            Button button = new Button("Open confirm dialog");
+//            button.addClickListener(event -> {
+//                dialog.open();
+//                status.setVisible(false);
+//            });
+
+
+
         }
 
         private void save() {
@@ -117,6 +146,7 @@ import org.springframework.beans.factory.annotation.Autowired;
                         3000, Notification.Position.BOTTOM_START);
             }
         }
+
 
 
         public void editCustomer(Customer customer) {

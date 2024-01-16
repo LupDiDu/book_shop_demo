@@ -3,7 +3,9 @@ package com.library.library.View;
 import com.library.library.Components.CustomerEditor;
 import com.library.library.Repository.CustomerRepository;
 import com.library.library.Users.Customer;
+import com.vaadin.flow.component.confirmdialog.ConfirmDialog;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
@@ -22,7 +24,6 @@ public class AdminUserControlView extends VerticalLayout {
     private final TextField filter = new TextField();
     private final Button addNewButton = new Button("Create Customer", VaadinIcon.PLUS.create());
     private final HorizontalLayout toolbar = new HorizontalLayout(filter, addNewButton);
-
     private CustomerRepository customerRepository;
     private Grid<Customer> customerGrid = new Grid<>(Customer.class);
 
@@ -52,9 +53,7 @@ public class AdminUserControlView extends VerticalLayout {
         });
 
         showCustomer("");
-
     }
-
     public AdminUserControlView() {
 
     }
