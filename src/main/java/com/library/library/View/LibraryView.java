@@ -30,7 +30,7 @@ public class LibraryView extends VerticalLayout {
             // Добавляем 4 книги в текущую группу
             for (int i = 0; i < 4 && index < books.size(); i++) {
                 Book book = books.get(index);
-                Anchor bookLink = new Anchor("https://localhost/book/" + book.getName() + "/" + book.getId());
+                Anchor bookLink = new Anchor("/book/" + book.getId());
                 Div bookInfo = new Div();
                 Text bookName = new Text(book.getName() + " ");
                 Text authorName = new Text(book.getAuthor());
@@ -44,7 +44,7 @@ public class LibraryView extends VerticalLayout {
 //                Element anchorElement = bookLink.getElement();
 //
 //                anchorElement.addEventListener("click", event -> {
-//                    getUI().ifPresent(ui -> ui.navigate("/book/"+ book.getName() + "/" + book.getId()));
+//                    getUI().ifPresent(ui -> ui.navigate("/book/"+ book.getId()));
 //                });
                 horizontalLayout.add(bookLink);
 

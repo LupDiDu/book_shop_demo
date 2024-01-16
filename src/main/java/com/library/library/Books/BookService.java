@@ -23,7 +23,7 @@ public class BookService {
     }
 
     public void addNewBook(Book book) {
-        Optional<Book> bookByName = bookRepository.findBookByName(book.getName());
+        Optional<Book> bookByName = bookRepository.findBookById(book.getId());
         if (bookByName.isPresent()) {
             throw new IllegalStateException("Book with this name already exists");
         } else {
