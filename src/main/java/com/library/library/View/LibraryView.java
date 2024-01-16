@@ -34,6 +34,9 @@ public class LibraryView extends VerticalLayout {
 
                 Book book = books.get(index);
 
+
+
+
                 Anchor bookLink = new Anchor("/book/" + book.getId());
                 Div bookInfo = new Div();
                 Text bookName = new Text(book.getName() + " ");
