@@ -11,12 +11,11 @@ import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.dom.Element;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
 import java.util.List;
-@Route("/library")
+@Route(value = "/", layout = MainView.class)
 @PageTitle("Library")
 public class LibraryView extends VerticalLayout {
     private BookRepository bookRepository;

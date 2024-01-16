@@ -1,19 +1,25 @@
 package com.library.library.View;
 
+import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
-import com.vaadin.flow.router.Route;
+import com.vaadin.flow.router.RouterLayout;
 
-@Route("/")
-public class MainView extends VerticalLayout {
+public class MainView extends Div implements RouterLayout {
+    private Div contentWrapper;
+
     public static TextField searchField = new TextField();
 
     public MainView() {
+        contentWrapper = new Div();
+        contentWrapper.setSizeFull();
+        add(contentWrapper);
 
         // Ссылка на главную страницу
         Button homeLink = new Button("Home");
@@ -53,8 +59,11 @@ public class MainView extends VerticalLayout {
         layout.setWidthFull();
         add(layout);
 
-        VerticalLayout verticalLayout = new VerticalLayout();
-//        add.verticalLayout;
+        contentWrapper.addComponentAsFirst(layout);
+    }
 
+    @Override
+    public void showRouterLayoutContent(HasElement content) {
+        contentWrapper.getElement().appendChild(content.getElement());
     }
 }

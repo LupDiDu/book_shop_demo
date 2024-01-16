@@ -51,6 +51,13 @@
 			<artifactId>jboss-transaction-api_1.2_spec</artifactId>
 			<version>1.1.1.Final</version>
 		</dependency>
+
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-core</artifactId>
+			<version>24.3.0</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
