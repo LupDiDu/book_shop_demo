@@ -1,7 +1,7 @@
 package com.library.library.View;
 
-import com.library.library.View.AdminUserControlView;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -21,6 +21,8 @@ public class MainView extends VerticalLayout {
         add(homeLink);
 
         Button searchButton = new Button(VaadinIcon.SEARCH.create());
+        searchButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY,
+                ButtonVariant.LUMO_CONTRAST);
         searchButton.setHeight("45px");
 
         // Поле для поиска
