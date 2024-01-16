@@ -3,6 +3,7 @@ package com.library.library.View;
 import com.library.library.Books.Book;
 import com.library.library.Repository.BookRepository;
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -18,6 +19,8 @@ public class BookView extends VerticalLayout {
         int bookID = Integer.parseInt(id.get("id").orElse(""));
 
         book = bookRepository.findBookById(bookID).get();
+        String imageUrl = book.getImage();
+        Image image = new Image(imageUrl, book.getName());
 
         VerticalLayout verticalLayout = new VerticalLayout();
         HorizontalLayout horizontalLayout = new HorizontalLayout(verticalLayout);
@@ -27,6 +30,7 @@ public class BookView extends VerticalLayout {
         Component authorLabel = new Span(book.getAuthor());
         Component yearOfPublishingLabel = new Span(book.getYearOfPublishing());
 
+        horizontalLayout.add(image);
         verticalLayout.add(nameLabel, idLabel, costLabel, authorLabel, yearOfPublishingLabel);
 
         add(horizontalLayout, verticalLayout);

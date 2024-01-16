@@ -1,5 +1,6 @@
 package com.library.library.Books;
 import jakarta.persistence.*;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 @Entity
@@ -19,8 +20,27 @@ public class Book {
     private String name;
     private String author;
     private String yearOfPublishing;
+    private String description;
+    private String image;
     private int cost;
     private int score;
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
     private ArrayList<String> genres = new ArrayList<String>();
 
     public Book(String name, String author, String yearOfPublishing,
