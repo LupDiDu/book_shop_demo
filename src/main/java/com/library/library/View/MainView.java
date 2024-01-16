@@ -1,63 +1,55 @@
 package com.library.library.View;
 
-import com.library.library.Components.CustomerEditor;
-import com.library.library.Repository.CustomerRepository;
-import com.library.library.Users.Customer;
-import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.router.Route;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.library.library.View.AdminUserControlView;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
-import com.vaadin.flow.data.value.ValueChangeMode;
+import com.vaadin.flow.router.Route;
 
 @Route("/")
 public class MainView extends VerticalLayout {
 
-    private final CustomerEditor customerEditor;
-    private final TextField filter = new TextField();
-    private final Button addNewButton = new Button("Create Customer", VaadinIcon.PLUS.create());
-    private final HorizontalLayout toolbar = new HorizontalLayout(filter, addNewButton);
+    public MainView() {
 
-    private CustomerRepository customerRepository;
-    private Grid<Customer> customerGrid = new Grid<>(Customer.class);
+        // Ссылка на главную страницу
+        Button homeLink = new Button("Home");
+        homeLink.setHeight("50px");
+        homeLink.addClickListener(e -> getUI().ifPresent(ui -> ui.navigate("/")));
+        add(homeLink);
 
-    @Autowired
-    public MainView(CustomerRepository customerRepository, CustomerEditor customerEditor) {
-        this.customerRepository = customerRepository;
-        this.customerEditor = customerEditor;
+        Button searchButton = new Button(VaadinIcon.SEARCH.create());
+        searchButton.setHeight("45px");
 
-        add(customerGrid);
+        // Поле для поиска
+        TextField searchField = new TextField();
+        searchField.setPlaceholder("Search...");
+        searchField.setSuffixComponent(searchButton);
 
-        filter.setPlaceholder("Type to filter");
-        filter.setValueChangeMode(ValueChangeMode.EAGER);
-        filter.addValueChangeListener(field -> showCustomer(field.getValue()));
+        searchField.setMinHeight("50px");
+        searchField.setMinWidth("500px");
 
-        add(toolbar, customerGrid, customerEditor);
-
-        customerGrid
-                .asSingleSelect()
-                .addValueChangeListener(e -> customerEditor.editCustomer(e.getValue()));
-
-        addNewButton.addClickListener(e -> customerEditor.editCustomer(new Customer()));
-
-        customerEditor.setChangeHandler(() -> {
-            customerEditor.setVisible(false);
-            showCustomer(filter.getValue());
-        });
-
-        showCustomer("");
-
-    }
+        searchField.setMaxHeight("50px");
+        searchField.setMaxWidth("500px");
 
 
-    private void showCustomer(String email) {
-        if (email.isEmpty()) {
-            customerGrid.setItems(customerRepository.findAll());
-        } else {
-            customerGrid.setItems(customerRepository.findCustomerByEmail(email));
-        }
+        searchButton.addClickListener(e -> getUI().
+                ifPresent(ui -> ui.navigate("/search?q=" + searchField.getValue())));
+
+        add(searchField);
+
+        // Элемент круга в форме ссылки на кабинет пользователя
+        Button userLink = new Button(new Icon(VaadinIcon.CIRCLE));
+        userLink.addClickListener(e -> getUI().ifPresent(ui -> ui.navigate("/")));
+        userLink.setHeight("50px");
+        add(userLink);
+
+
+        HorizontalLayout layout = new HorizontalLayout(homeLink, searchField, userLink);
+        layout.setWidthFull();
+        add(layout);
+
     }
 }
