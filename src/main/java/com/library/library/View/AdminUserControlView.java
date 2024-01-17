@@ -9,6 +9,7 @@ import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.server.VaadinService;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -31,7 +32,6 @@ public class AdminUserControlView extends VerticalLayout {
     public AdminUserControlView(CustomerRepository customerRepository, CustomerEditor customerEditor) {
         this.customerRepository = customerRepository;
         this.customerEditor = customerEditor;
-
         filter.setPlaceholder("Type to filter");
         filter.setValueChangeMode(ValueChangeMode.EAGER);
         filter.addValueChangeListener(field -> showCustomer(field.getValue()));

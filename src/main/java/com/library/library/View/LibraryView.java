@@ -16,6 +16,7 @@ import com.vaadin.flow.router.Route;
 
 import java.util.List;
 @Route(value = "/", layout = MainView.class)
+
 @PageTitle("Library")
 public class LibraryView extends VerticalLayout {
     private BookRepository bookRepository;
@@ -37,7 +38,7 @@ public class LibraryView extends VerticalLayout {
 
 
 
-                Anchor bookLink = new Anchor("/book/" + book.getId());
+                Anchor bookLink = new Anchor("/book/" + book.getId() + "/");
                 Div bookInfo = new Div();
                 Text bookName = new Text(book.getName() + " ");
                 Text authorName = new Text(book.getAuthor());

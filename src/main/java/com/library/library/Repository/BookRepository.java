@@ -10,6 +10,6 @@ import java.util.Optional;
 @Repository
 public interface BookRepository extends JpaRepository<Book, Long> {
     @Query("SELECT s FROM Book s WHERE s.id = ?1")
-    Optional<Book> findBookById(int id);
+    Optional<Book> findBookById(Long id);
 
 }

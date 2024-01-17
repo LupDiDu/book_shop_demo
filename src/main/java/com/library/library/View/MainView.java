@@ -44,7 +44,7 @@ public class MainView extends Div implements RouterLayout {
 
 
         searchButton.addClickListener(e -> getUI().
-                ifPresent(ui -> ui.navigate("/search?q=" + searchField.getValue())));
+                ifPresent(ui -> ui.navigate("" + searchField.getValue())));
 
         add(searchField);
 
