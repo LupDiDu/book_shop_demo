@@ -7,14 +7,14 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.RouterLayout;
 
 public class MainView extends Div implements RouterLayout {
     private Div contentWrapper;
 
-    public static TextField searchField = new TextField();
+    public TextField searchField = new TextField();
+    HorizontalLayout layout;
 
     public MainView() {
         contentWrapper = new Div();
@@ -55,12 +55,15 @@ public class MainView extends Div implements RouterLayout {
         add(userLink);
 
 
-        HorizontalLayout layout = new HorizontalLayout(homeLink, searchField, userLink);
+        layout = new HorizontalLayout(homeLink, searchField, userLink);
         layout.setWidthFull();
         add(layout);
 
         contentWrapper.addComponentAsFirst(layout);
+
+
     }
+
 
     @Override
     public void showRouterLayoutContent(HasElement content) {

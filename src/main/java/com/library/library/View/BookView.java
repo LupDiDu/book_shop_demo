@@ -3,12 +3,14 @@ package com.library.library.View;
 import com.library.library.Books.Book;
 import com.library.library.Repository.BookRepository;
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.Text;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.*;
-import com.vaadin.flow.server.VaadinService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Route(value = "/book/:id", layout = MainView.class)
 @PageTitle("Book")
@@ -23,13 +25,8 @@ public class BookView extends VerticalLayout  implements BeforeEnterObserver{
 
     @Override
     public void beforeEnter(BeforeEnterEvent event) {
-        System.out.println("LOGCHECK");
         id = event.getRouteParameters().get("id").get();
-        System.out.println("ID: " + id);
-        //Получаем ID книги из URL
-//        String bookIdString = getThisBookId();
 
-        //Конвертируем String в Long
         Long bookId = Long.valueOf(id);
 
         // Получаем информацию о книге из репозитория
@@ -56,28 +53,31 @@ public class BookView extends VerticalLayout  implements BeforeEnterObserver{
         Component costLabel = new Span("Cost: " + String.valueOf(book.getCost()) + "$");
         Component authorLabel = new Span("Author: " + book.getAuthor());
         Component yearOfPublishingLabel = new Span("Year of publishing: " + book.getYearOfPublishing());
+        Component genresLabel = new Span("Genres: " + book.getGenres());
+        if(book.getDescription() == null){
+            book.setDescription("");
+        }
+
+        Component descriptionLabel = new Span("Description to the book: " + book.getName());
+        Div descriptionLabelWrapper = new Div(descriptionLabel);
+        descriptionLabelWrapper.setWidth("300px");
+
+        Component lineBreak = new Text("\n");
+        Component descriptionText = new Text(book.getDescription());
+
+        Component descriptionComponent = new Span(descriptionLabelWrapper, lineBreak, descriptionText);
 
         horizontalLayout.add(image);
-        verticalLayout.add(nameLabel, idLabel, costLabel, authorLabel, yearOfPublishingLabel);
+        verticalLayout.add(nameLabel, authorLabel, genresLabel,yearOfPublishingLabel, idLabel, costLabel);
         horizontalLayout.add(verticalLayout);
+        horizontalLayout.add(descriptionComponent);
         add(horizontalLayout);
+
     }
 
-
-    public BookView(BookRepository bookRepository) {
+    @Autowired
+    public BookView( BookRepository bookRepository) {
         this.bookRepository = bookRepository;
-    }
-
-    private String getThisBookId() {
-        //Получаем Url запроса
-        String pathInfo = VaadinService.getCurrentRequest().getPathInfo();
-        //Игнорируем перый слеш
-        pathInfo = pathInfo.substring(1);
-
-        // Извлекаем значение параметра bookId из пути запроса
-        int slashIndex = pathInfo.indexOf("/");
-        // Возвращаем bookId
-        return pathInfo.substring(slashIndex + 1);
     }
 
 }
