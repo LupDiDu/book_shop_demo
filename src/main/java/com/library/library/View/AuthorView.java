@@ -2,6 +2,8 @@ package com.library.library.View;
 
 
 import com.library.library.Books.Author;
+import com.library.library.Books.Book;
+import com.library.library.Components.LibraryComponent;
 import com.library.library.Repository.AuthorRepository;
 import com.library.library.Repository.BookRepository;
 import com.vaadin.flow.component.Component;
@@ -17,6 +19,8 @@ import com.vaadin.flow.router.Route;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Calendar;
+import java.util.List;
+import java.util.Optional;
 
 @Route(value = "/author/:id", layout = MainView.class)
 @PageTitle("Author")
@@ -57,6 +61,10 @@ public class AuthorView extends VerticalLayout implements BeforeEnterObserver {
         verticalLayoutAuthorInformation.add(nameLabel, idLabel, dateOfBirthLabel, authorDateOfDeath);
         horizontalLayout.add(verticalLayoutAuthorInformation);
         add(horizontalLayout);
+
+        List<Book> books = bookRepository.findBooksByAuthorId(authorId);
+        LibraryComponent libraryComponent = new LibraryComponent(books, authorRepository);
+        add(libraryComponent);
     }
     @Autowired
     public AuthorView( BookRepository bookRepository, AuthorRepository authorRepository) {
