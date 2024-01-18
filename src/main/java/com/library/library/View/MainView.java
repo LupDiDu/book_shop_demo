@@ -1,5 +1,6 @@
 package com.library.library.View;
 
+import com.library.library.Repository.BookRepository;
 import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
@@ -12,8 +13,9 @@ import com.vaadin.flow.router.RouterLayout;
 
 public class MainView extends Div implements RouterLayout {
     private Div contentWrapper;
-
+    private String filter;
     public TextField searchField = new TextField();
+    private BookRepository bookRepository;
     HorizontalLayout layout;
 
     public MainView() {
@@ -42,9 +44,10 @@ public class MainView extends Div implements RouterLayout {
         searchField.setMaxHeight("50px");
         searchField.setMaxWidth("500px");
 
-
-        searchButton.addClickListener(e -> getUI().
-                ifPresent(ui -> ui.navigate("" + searchField.getValue())));
+        searchButton.addClickListener(e ->{
+                    getUI().ifPresent(ui -> ui.navigate("/search/" + searchField.getValue()));
+                }
+        );
 
         add(searchField);
 
