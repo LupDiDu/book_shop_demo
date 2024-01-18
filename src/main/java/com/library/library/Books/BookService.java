@@ -42,7 +42,7 @@ public class BookService {
     }
 
     @Transactional
-    public void updateBook(Long bookId, String name, String  author,
+    public void updateBook(Long bookId, String name, Long  author,
                            String yearOfPublishing, int cost, ArrayList<String> genres){ {
         Book book = bookRepository.findById(bookId)
                 .orElseThrow(()-> new IllegalStateException("Book with id: " + bookId + " doesn't exists."));
@@ -51,7 +51,7 @@ public class BookService {
             book.setName(name);
         }
 
-        if(author != null && author.length() > 0 && Objects.equals(book.getAuthor(), author)){
+        if(author != null && author.toString().length() > 0 && Objects.equals(book.getAuthorId(), author)){
             Optional<Book> bookOptional = bookRepository.findById(bookId);
             if (bookOptional.isPresent()){
                 throw new IllegalStateException("Author is the same.");

@@ -1,6 +1,7 @@
 package com.library.library.View;
 
 import com.library.library.Books.Book;
+import com.library.library.Repository.AuthorRepository;
 import com.library.library.Repository.BookRepository;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Html;
@@ -20,9 +21,12 @@ import java.util.List;
 @PageTitle("Library")
 public class LibraryView extends VerticalLayout {
     private BookRepository bookRepository;
+    private AuthorRepository authorRepository;
     private Component imageComponent;
+    private Text authorName;
 
-    public LibraryView(BookRepository bookRepository) {
+    public LibraryView(BookRepository bookRepository, AuthorRepository authorRepository) {
+        this.authorRepository = authorRepository;
         this.bookRepository = bookRepository;
         List<Book> books = bookRepository.findAll();
         int index = 0;
@@ -41,7 +45,12 @@ public class LibraryView extends VerticalLayout {
                 Anchor bookLink = new Anchor("/book/" + book.getId() + "/");
                 Div bookInfo = new Div();
                 Text bookName = new Text(book.getName() + " ");
-                Text authorName = new Text(book.getAuthor());
+                if(authorRepository.findAuthorById(book.getAuthorId()) == null){
+                    authorName = new Text("Unknown author");
+                }
+                else{
+                    authorName = new Text(authorRepository.findAuthorById(book.getAuthorId()).getName());
+                }
                 Html lineBreak = new Html("<br>");
 
                 String bookImage = book.getImage();
@@ -82,11 +91,4 @@ public class LibraryView extends VerticalLayout {
             add(horizontalLayout);
         }
     }
-//    private void showBooks() {
-//        if (MainView.searchField.isEmpty()) {
-//            customerGrid.setItems(customerRepository.findAll());
-//        } else {
-//            customerGrid.setItems(customerRepository.findCustomerByEmail(email));
-//        }
-//    }
 }

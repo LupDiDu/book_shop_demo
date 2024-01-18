@@ -17,7 +17,7 @@ public class Author {
             strategy = GenerationType.SEQUENCE,
             generator = "author_sequence"
     )
-    private int id;
+    private Long id;
     private String name;
     private String surname;
     private Calendar dateOfBirth;
@@ -33,11 +33,11 @@ public class Author {
         this.dateOfDeath = dateOfDeath;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

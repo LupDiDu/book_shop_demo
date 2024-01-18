@@ -7,7 +7,7 @@ import java.util.Calendar;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/addAuthor")
+@RequestMapping("/api/Author/{id}")
 public class AuthorController {
     private final AuthorService authorService;
 
@@ -17,25 +17,25 @@ public class AuthorController {
     }
 
     @GetMapping
-    public List<Author> getAuthor(){
-        return authorService.getAuthor();
+    public Author getAuthor(@PathVariable("id") Long id){
+        return authorService.getAuthor(id);
     }
 
     @PostMapping
     public void registryNewAuthor(@RequestBody Author author){
         authorService.addNewAuthor(author);
     }
-    @DeleteMapping(path = "authorId")
-    public void deleteAuthor(@PathVariable("authorId") Long authorId){
-        authorService.deleteAuthorById(authorId);
+    @DeleteMapping(path = "id")
+    public void deleteAuthor(@PathVariable("id") Long id){
+        authorService.deleteAuthorById(id);
     }
 
-    @PutMapping(path = "authorId")
-    public void updateAuthor(@PathVariable("authorId") Long authorId,
+    @PutMapping(path = "id")
+    public void updateAuthor(@PathVariable("id") Long id,
                                @RequestParam(required = false) String name,
                                @RequestParam(required = false) String surname,
                                @RequestParam(required = false) Calendar dateOfBirth,
                                @RequestParam(required = false) Calendar dateOfDeath){
-        authorService.updateAuthor(authorId, name, surname, dateOfBirth, dateOfDeath);
+        authorService.updateAuthor(id, name, surname, dateOfBirth, dateOfDeath);
     }
 }

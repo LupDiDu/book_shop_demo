@@ -35,7 +35,7 @@ import java.util.List;
         @PutMapping(path = "bookId")
         public void updateBook(@PathVariable("bookId") Long bookId,
                                    @RequestParam(required = false) String name,
-                                   @RequestParam(required = false) String author,
+                                   @RequestParam(required = false) Long author,
                                    @RequestParam(required = false) String yearOfPublishing,
                                    @RequestParam(required = false) int cost,
                                    @RequestParam(required = false) ArrayList<String> genres

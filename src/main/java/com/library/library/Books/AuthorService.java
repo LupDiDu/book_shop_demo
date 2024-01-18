@@ -4,6 +4,7 @@ import com.library.library.Repository.AuthorRepository;
 
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.Calendar;
@@ -19,8 +20,8 @@ public class AuthorService {
         this.authorRepository = authorRepository;
     }
 
-    public List<Author> getAuthor() {
-        return authorRepository.findAll();
+    public Author getAuthor(Long id) {
+        return authorRepository.findAuthorById(id);
     }
 
     public void addNewAuthor(Author author) {

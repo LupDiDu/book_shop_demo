@@ -1,9 +1,12 @@
 package com.library.library.View;
 
+import com.library.library.Books.Author;
 import com.library.library.Books.Book;
+import com.library.library.Repository.AuthorRepository;
 import com.library.library.Repository.BookRepository;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Text;
+import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Span;
@@ -18,9 +21,14 @@ public class BookView extends VerticalLayout  implements BeforeEnterObserver{
 
     //Инициализируем репозитории и книгу
     private BookRepository bookRepository;
+    private AuthorRepository authorRepository;
     private Book book;
-
+    private Author author;
+    private Component authorNameLabel;
+    private Span authorLabel;
+    private Anchor authorLink;
     public String id;
+
 
 
     @Override
@@ -48,10 +56,23 @@ public class BookView extends VerticalLayout  implements BeforeEnterObserver{
 
         VerticalLayout verticalLayout = new VerticalLayout();
         HorizontalLayout horizontalLayout = new HorizontalLayout(verticalLayout);
+
         Component nameLabel = new Span("Name: " + book.getName());
         Component idLabel = new Span("Id : " + String.valueOf(book.getId()));
         Component costLabel = new Span("Cost: " + String.valueOf(book.getCost()) + "$");
-        Component authorLabel = new Span("Author: " + book.getAuthor());
+
+        if(book.getAuthorId() == null){
+            authorLabel = new Span("Author: Unknown author");
+        }
+        else{
+            author = authorRepository.findAuthorById(book.getAuthorId());
+            authorNameLabel = new Span(author.getName() + " " + author.getSurname());
+            authorLink = new Anchor("/author/"
+                    + authorRepository.findAuthorById(book.getAuthorId()).getId() + "/", authorNameLabel);
+            Component author = new Span("Author: ");
+            authorLabel = new Span(author, authorLink);
+        }
+
         Component yearOfPublishingLabel = new Span("Year of publishing: " + book.getYearOfPublishing());
         Component genresLabel = new Span("Genres: " + book.getGenres());
         if(book.getDescription() == null){
@@ -76,7 +97,8 @@ public class BookView extends VerticalLayout  implements BeforeEnterObserver{
     }
 
     @Autowired
-    public BookView( BookRepository bookRepository) {
+    public BookView( BookRepository bookRepository, AuthorRepository authorRepository) {
+        this.authorRepository = authorRepository;
         this.bookRepository = bookRepository;
     }
 

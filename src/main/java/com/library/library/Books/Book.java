@@ -18,7 +18,7 @@ public class Book {
     )
     private Long id;
     private String name;
-    private String author;
+    private Long authorId;
     private String yearOfPublishing;
     private String description;
     private String image;
@@ -43,10 +43,10 @@ public class Book {
 
     private ArrayList<String> genres = new ArrayList<String>();
 
-    public Book(String name, String author, String yearOfPublishing,
+    public Book(String name, Long authorId, String yearOfPublishing,
                 int cost, int score, ArrayList<String> genres) {
         this.name = name;
-        this.author = author;
+        this.authorId = authorId;
         this.yearOfPublishing = yearOfPublishing;
         this.cost = cost;
         this.score = score;
@@ -79,12 +79,12 @@ public class Book {
         this.name = name;
     }
 
-    public String getAuthor() {
-        return author;
+    public Long getAuthorId() {
+        return authorId;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setAuthor(Long authorId) {
+        this.authorId = authorId;
     }
 
     public String getYearOfPublishing() {
@@ -101,6 +101,21 @@ public class Book {
 
     public void setCost(int cost) {
         this.cost = cost;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", authorId=" + authorId +
+                ", yearOfPublishing='" + yearOfPublishing + '\'' +
+                ", description='" + description + '\'' +
+                ", image='" + image + '\'' +
+                ", cost=" + cost +
+                ", score=" + score +
+                ", genres=" + genres +
+                '}';
     }
 
     public int getScore() {
