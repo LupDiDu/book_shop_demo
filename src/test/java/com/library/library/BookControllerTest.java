@@ -74,7 +74,7 @@ public class BookControllerTest {
 
     @Test
     void testDeleteBook() throws Exception {
-        mockMvc.perform(delete("/api/addBook/bookId")
+        mockMvc.perform(delete("/api/addBook")
                         .param("bookId", String.valueOf(book.getId())).with(csrf()))
                 .andExpect(status().isOk());
         verify(bookService, times(1))
@@ -84,7 +84,7 @@ public class BookControllerTest {
     @Test
     void testUpdateBook() throws Exception {
         mockMvc.perform(put(
-                        "/api/addBook/bookId")
+                        "/api/addBook")
                         .param("bookId", String.valueOf(book.getId()))
                         .param("name", "Updated Book")
                         .param("author", "24L")
