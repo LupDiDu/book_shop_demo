@@ -27,6 +27,7 @@ import java.util.List;
         public void registryNewBook(@RequestBody Book book){
             bookService.addNewBook(book);
         }
+
         @DeleteMapping(path = "bookId")
         public void deleteBook(@PathVariable("bookId") Long bookId){
             bookService.deleteBookById(bookId);

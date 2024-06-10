@@ -42,32 +42,28 @@ public class BookService {
     }
 
     @Transactional
-    public void updateBook(Long bookId, String name, Long  author,
+    public void updateBook(Long bookId, String name, Long  authorId,
                            String yearOfPublishing, int cost, ArrayList<String> genres){ {
         Book book = bookRepository.findById(bookId)
                 .orElseThrow(()-> new IllegalStateException("Book with id: " + bookId + " doesn't exists."));
 
-        if(name != null && name.length() > 0 && Objects.equals(book.getName(), name)){
+        if(name != null && name.length() > 0 && !Objects.equals(book.getName(), name)){
             book.setName(name);
         }
 
-        if(author != null && author.toString().length() > 0 && Objects.equals(book.getAuthorId(), author)){
-            Optional<Book> bookOptional = bookRepository.findById(bookId);
-            if (bookOptional.isPresent()){
-                throw new IllegalStateException("Author is the same.");
-            }
-            book.setAuthor(author);
+        if(authorId != null && authorId.toString().length() > 0 && !Objects.equals(book.getAuthorId(), authorId)){
+            book.setAuthor(authorId);
         }
 
-        if(yearOfPublishing.length() == 4 && Objects.equals(book.getYearOfPublishing(), yearOfPublishing)){
+        if(yearOfPublishing.length() == 4 && !Objects.equals(book.getYearOfPublishing(), yearOfPublishing)){
             book.setYearOfPublishing(yearOfPublishing);
         }
 
-        if(cost > 0 && Objects.equals(book.getCost(), cost)){
+        if(cost > 0 && !Objects.equals(book.getCost(), cost)){
             book.setCost(cost);
         }
 
-        if(genres != null && genres.size() > 0 && Objects.equals(book.getGenres(), genres)){
+        if(genres != null && genres.size() > 0 && !Objects.equals(book.getGenres(), genres)){
             book.setGenres(genres);
         }
 
